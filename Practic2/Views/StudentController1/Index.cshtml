@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<Practic2.Models.StudentViewModel>
+
+<!DOCTYPE html>
+<html>
+    <head>
+    <div>
+        <a asp-action="Create">Create a New Students</a>
+    </div>
+    <title>Student Informations</title>
+    </head>
+    <body>  
+     <h1>Student Information</h1>
+    <table style="margin-left:20px">
+        <thead style ="margin-left:20px">
+            <tr style="margin-left:20px">
+                <th>Student ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Phone</th>
+                <th>BookName</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            
+            @foreach (var student in Model)
+            {
+                <tr style="margin-left:20px">
+                    <td>@student.StudentID</td>
+                    <td>@student.StudentName</td>
+                    <td>@student.Email</td>
+                    <td>@student.Password</td>
+                    <td>@student.Phone</td>
+                    <td>
+                    @foreach (var item in student.BookList)
+                    {
+                        <input name="@item.BookID" type="hidden" value="@item.BookID" checked="@item.IsSelected" />
+                        <br />
+                        @item.BookName
+                    }
+                    </td>
+                    <td style="margin-left:20px">
+                        @Html.ActionLink("Edit", "Edit",  new { id=student.StudentID }, new {@class="ui-btn"}  )
+                        @Html.ActionLink("Delete", "Delete",  new { id=student.StudentID }, new {@class="ui-btn"}  )
+                        @Html.ActionLink("Details", "Details",  new { id=student.StudentID }, new {@class="ui-btn"}  )
+                </td>  
+                </tr>
+                }
+        </tbody>    
+    </table>
+</body>
+</html>
+
